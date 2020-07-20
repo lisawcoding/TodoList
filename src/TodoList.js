@@ -1,12 +1,29 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {v1 as uuid} from "uuid"; 
+import firebase from "./firebase";
 
 import {TodoContext} from './TodoContext';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
 
+
 function TodoList() {
   const { setTodo, todos, setTodos } = useContext(TodoContext);
+
+  useEffect(()=>{
+    firebase
+    .firestore()
+    .collection("TodoList")
+    .orderBy("todo.date")
+    .onSnapshot((snapshot)=>{
+      // debugger
+      const newTodos=snapshot.docs.map((doc)=>({
+        docId: doc.id,
+        ...doc.data().todo
+      }))
+      setTodos(newTodos)
+    })
+  }, [])
 
   function change (evt){
     setTodo({
@@ -17,13 +34,24 @@ function TodoList() {
 }
 
 function submit (todo){
-    // evt.preventDefault();
-    setTodos([...todos, todo])
-    // setTodo({task: ''})
+    setTodos([...todos, todo]);
+
+    firebase
+    .firestore()
+    .collection('TodoList')
+    .add({
+      todo
+    })
 }
 
-  function removeTodo(id){
-    setTodos(todos.filter(todo=>todo.id !== id))  
+  function removeTodo(docId){
+    setTodos(todos.filter(todo=>todo.docId !== docId))  
+
+    firebase
+    .firestore()
+    .collection("TodoList")
+    .doc(docId)
+    .delete();
   }
 
   function toggleCompleted (id) {
@@ -48,9 +76,11 @@ function submit (todo){
                   task={todo.task} 
                   key={todo.id} 
                   id={todo.id} 
+                  docId={todo.docId}
                   removeTodo={removeTodo}
                   completed={todo.completed}
                   toggleCompleted={toggleCompleted}
+                  date={todo.date}
                 />
               )}
             </ul>

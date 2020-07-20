@@ -63,14 +63,15 @@ a {
     }
     .Todo {
         display: flex;
-        padding: .2em 2em;
+        padding: .2em 1.2em;
         justify-content: space-between;
         text-transform: capitalize;
         background-color: $light-red;
         margin-bottom: .1em;
         li {
             width: 90%;
-            // word-break: break-all;
+            display: flex;
+            align-items: center;
         }
         button {
             // padding: 0 .15em;

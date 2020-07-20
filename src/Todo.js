@@ -3,7 +3,9 @@ import React from 'react';
 function Todo (props){
 
     function handleRemove(){
-        props.removeTodo(props.id)
+        console.log(props.id)
+        console.log(props.docId)
+        props.removeTodo(props.docId)
     }
 
     function handleToggle (evt) {

@@ -25,6 +25,7 @@ function NewTodoForm (props) {
             [evt.target.name] : evt.target.value, 
             id: uuid(),
             completed: false,
+            date: new Date().toLocaleString('en-US')
         })
     }
     function handleSubmit (evt) {
