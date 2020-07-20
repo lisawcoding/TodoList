@@ -1,0 +1,104 @@
+$green: #41b3a3;
+$red: #e27d60;
+$light-red: #e8a87c;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2em;
+    font-family: 1.2em;
+    height: 100%;
+    background-color: $green;
+}
+a {
+    text-decoration: none;
+}
+
+.completed {
+    color: lightgray;
+    // position: relative;
+    text-decoration: line-through;
+}
+// .completed:before {
+//     content: '';
+//     position: absolute;
+//     top: 50%;
+//     // left: -.5rem;
+//     display: block;
+//     width: 0;
+//     height: 1.5px;
+//     background: #fff;
+//     animation: lineThrough .15s ease-out 0s forwards;
+//     transform: translateY(-50%);
+// }
+@keyframes lineThrough {
+    to {
+        width: 100%;
+    }
+}
+.TodoList {
+    margin: 5rem auto;
+    padding: 2em;
+    max-width: 500px;
+    min-width: 350px;
+    background: $red;
+    color: #fff;
+    box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, 0.1);
+    button {
+        padding: 0 1.5em;
+        border: none;
+        background: $red;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: #fff;
+        border: 1px solid #fff;
+        &:hover {
+            background: $green;
+        }
+    }
+    .Todo {
+        display: flex;
+        padding: .2em 2em;
+        justify-content: space-between;
+        text-transform: capitalize;
+        background-color: $light-red;
+        margin-bottom: .1em;
+        li {
+            width: 90%;
+            // word-break: break-all;
+        }
+        button {
+            // padding: 0 .15em;
+            border: 0;
+            width: 20px;
+            height: 25px;
+            padding: 0;
+            align-self: center;
+            &hover {
+                background-color: $red !important;
+            }
+        }
+    }
+    form {
+        margin: .5em 0;
+        display: flex;
+        flex-wrap: wrap;
+        input {
+            flex-grow: 1;
+            border: none;
+            background:#fff;
+            padding: 0 1.5em;
+            font-size: initial;
+            width: 70%;
+        }
+        button {
+            width: 30%
+        }
+    }
+
+}
